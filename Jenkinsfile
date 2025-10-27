@@ -1,19 +1,14 @@
-
-  
-
-#Docker Push Is Included Below
 pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "kastrov/devopsexamapp:latest"
+        DOCKER_IMAGE = "pratheek/devopsexamapp:latest"
     }
 
     stages {
         stage('Git Checkout') {
             steps {
-                git url: 'https://github.com/KastroVKiran/devops-exam-app.git', 
-                    branch: 'master'
+                git url: 'https://github.com/KastroVKiran/devops-exam-app.git', branch: 'master'
             }
         }
 
@@ -37,7 +32,6 @@ pipeline {
             }
         }
 
-        // NEW STAGE: Push to Docker Hub
         stage('Push to Docker Hub') {
             steps {
                 script {
@@ -83,13 +77,6 @@ pipeline {
                 echo "=== Testing Flask Endpoint ==="
                 curl -I http://localhost:5000 || true
                 '''
-            }
-        }
-    }
-
-   
-
-
             }
         }
     }
